@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoginMaster - Dashboard</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+
+    <!-- MENÚ LATERAL -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>LoginMaster</h2>
+        <p>Menú principal</p>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="#modulo-clientes" class="menu-item">👥 Clientes</a>
+        <a href="#modulo-productos" class="menu-item">📦 Productos</a>
+        <a href="#modulo-proveedores" class="menu-item">🤝 Proveedores</a>
+      </nav>
+
+      <button id="logoutBtn" class="logout-button">Cerrar sesión</button>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content" id="contenido-principal">
+      <!-- ENCABEZADO -->
+      <header class="dashboard-header">
+        <div>
+          <h1>Dashboard Administrativo</h1>
+          <p>Bienvenido, <strong id="nombreUsuario">Usuario</strong></p>
+        </div>
+      </header>
+
+      <!-- TARJETAS DE RESUMEN -->
+      <section class="dashboard-content">
+        <h2>Resumen general</h2>
+        <div class="cards-container">
+          <div class="dashboard-card">
+            <div class="card-icon">👥</div>
+            <div><h3>Clientes</h3><p id="clientes">0</p></div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-icon">📦</div>
+            <div><h3>Productos</h3><p id="productos">0</p></div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-icon">🤝</div>
+            <div><h3>Proveedores</h3><p id="proveedores">0</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTENEDORES PARA LOS MÓDULOS -->
+      <section id="modulo-clientes"></section>
+      <section id="modulo-productos"></section>
+      <section id="modulo-proveedores"></section>
+    </main>
+  </div>
+
+  <!-- Scripts conectados -->
+  <script src="./js/clientes.js"></script>
+  <script src="./js/productos.js"></script>
+  <script src="./js/proveedores.js"></script>
+  <script src="./js/dashboard.js"></script>
+</body>
+</html>
