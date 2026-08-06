@@ -1,2 +1,2 @@
 # loginmaster
-El proyecto es desarrollado por Ernesto Libby Lugo y Ulises. 
+El proyecto es desarrollado por Ernesto Libby Lugo y Ulysses. 
