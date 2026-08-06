@@ -3,27 +3,32 @@ const CLAVE_CLIENTES = "clientes";
 let clientes = cargarClientes();
 let clienteEditandoId = null;
 
-document.addEventListener("DOMContentLoaded", iniciarModuloClientes);
+document.addEventListener(
+    "DOMContentLoaded",
+    iniciarModuloClientes
+);
 
 function iniciarModuloClientes() {
-    const moduloClientes = document.getElementById("modulo-clientes");
+    const moduloClientes = document.getElementById(
+        "modulo-clientes"
+    );
 
-    if (!moduloClientes) {
+    if (moduloClientes === null) {
         console.warn(
-            "No se encontró el elemento con id modulo-clientes."
+            "No se encontró el elemento modulo-clientes."
         );
+
         return;
     }
 
     moduloClientes.innerHTML = `
         <section class="modulo-administrativo">
             <header class="encabezado-modulo">
-                <div>
-                    <h2>Administración de clientes</h2>
-                    <p>
-                        Registra, consulta, edita y elimina clientes.
-                    </p>
-                </div>
+                <h2>Administración de clientes</h2>
+
+                <p>
+                    Registra, consulta, edita y elimina clientes.
+                </p>
             </header>
 
             <form id="formulario-clientes">
@@ -78,7 +83,10 @@ function iniciarModuloClientes() {
                 </div>
 
                 <div class="acciones-formulario">
-                    <button id="boton-guardar-cliente" type="submit">
+                    <button
+                        id="boton-guardar-cliente"
+                        type="submit"
+                    >
                         Registrar cliente
                     </button>
 
@@ -155,7 +163,15 @@ function cargarClientes() {
     }
 
     try {
-        return JSON.parse(clientesGuardados);
+        const datosConvertidos = JSON.parse(
+            clientesGuardados
+        );
+
+        if (Array.isArray(datosConvertidos)) {
+            return datosConvertidos;
+        }
+
+        return [];
     } catch (error) {
         console.error(
             "No se pudieron cargar los clientes:",
@@ -167,12 +183,9 @@ function cargarClientes() {
 }
 
 function guardarClientes() {
-    const clientesConvertidosATexto =
-        JSON.stringify(clientes);
-
     localStorage.setItem(
         CLAVE_CLIENTES,
-        clientesConvertidosATexto
+        JSON.stringify(clientes)
     );
 }
 
@@ -204,7 +217,7 @@ function procesarFormularioCliente(evento) {
         telefono === "" ||
         estado === ""
     ) {
-        mostrarMensaje(
+        mostrarMensajeCliente(
             "Todos los campos son obligatorios.",
             "error"
         );
@@ -249,7 +262,7 @@ function registrarCliente(
 
     clientes.push(nuevoCliente);
 
-    mostrarMensaje(
+    mostrarMensajeCliente(
         "Cliente registrado correctamente.",
         "exito"
     );
@@ -268,7 +281,7 @@ function actualizarCliente(
     );
 
     if (clienteEncontrado === undefined) {
-        mostrarMensaje(
+        mostrarMensajeCliente(
             "No se encontró el cliente.",
             "error"
         );
@@ -281,13 +294,15 @@ function actualizarCliente(
     clienteEncontrado.telefono = telefono;
     clienteEncontrado.estado = estado;
 
-    mostrarMensaje(
+    mostrarMensajeCliente(
         "Cliente actualizado correctamente.",
         "exito"
     );
 }
 
 function mostrarClientes() {
+    actualizarContadorClientes();
+
     const listaClientes = document.getElementById(
         "lista-clientes"
     );
@@ -312,19 +327,19 @@ function mostrarClientes() {
         const fila = document.createElement("tr");
 
         fila.appendChild(
-            crearCelda(cliente.nombre)
+            crearCeldaCliente(cliente.nombre)
         );
 
         fila.appendChild(
-            crearCelda(cliente.correo)
+            crearCeldaCliente(cliente.correo)
         );
 
         fila.appendChild(
-            crearCelda(cliente.telefono)
+            crearCeldaCliente(cliente.telefono)
         );
 
         fila.appendChild(
-            crearCelda(cliente.estado)
+            crearCeldaCliente(cliente.estado)
         );
 
         const celdaAcciones =
@@ -354,7 +369,7 @@ function mostrarClientes() {
     });
 }
 
-function crearCelda(contenido) {
+function crearCeldaCliente(contenido) {
     const celda = document.createElement("td");
 
     celda.textContent = contenido;
@@ -371,6 +386,7 @@ function procesarAccionCliente(evento) {
     }
 
     const accion = botonPresionado.dataset.accion;
+
     const idCliente = Number(
         botonPresionado.dataset.id
     );
@@ -392,7 +408,7 @@ function prepararEdicionCliente(idCliente) {
     );
 
     if (clienteEncontrado === undefined) {
-        mostrarMensaje(
+        mostrarMensajeCliente(
             "No se encontró el cliente.",
             "error"
         );
@@ -400,17 +416,21 @@ function prepararEdicionCliente(idCliente) {
         return;
     }
 
-    document.getElementById("cliente-nombre").value =
-        clienteEncontrado.nombre;
+    document.getElementById(
+        "cliente-nombre"
+    ).value = clienteEncontrado.nombre;
 
-    document.getElementById("cliente-correo").value =
-        clienteEncontrado.correo;
+    document.getElementById(
+        "cliente-correo"
+    ).value = clienteEncontrado.correo;
 
-    document.getElementById("cliente-telefono").value =
-        clienteEncontrado.telefono;
+    document.getElementById(
+        "cliente-telefono"
+    ).value = clienteEncontrado.telefono;
 
-    document.getElementById("cliente-estado").value =
-        clienteEncontrado.estado;
+    document.getElementById(
+        "cliente-estado"
+    ).value = clienteEncontrado.estado;
 
     clienteEditandoId = idCliente;
 
@@ -422,7 +442,7 @@ function prepararEdicionCliente(idCliente) {
         "boton-cancelar-edicion"
     ).hidden = false;
 
-    mostrarMensaje(
+    mostrarMensajeCliente(
         "Editando cliente seleccionado.",
         "informacion"
     );
@@ -450,7 +470,7 @@ function eliminarCliente(idCliente) {
         limpiarFormularioCliente();
     }
 
-    mostrarMensaje(
+    mostrarMensajeCliente(
         "Cliente eliminado correctamente.",
         "exito"
     );
@@ -459,7 +479,7 @@ function eliminarCliente(idCliente) {
 function cancelarEdicionCliente() {
     limpiarFormularioCliente();
 
-    mostrarMensaje(
+    mostrarMensajeCliente(
         "Edición cancelada.",
         "informacion"
     );
@@ -483,11 +503,19 @@ function limpiarFormularioCliente() {
     ).hidden = true;
 }
 
-function mostrarMensaje(texto, tipo) {
+function mostrarMensajeCliente(texto, tipo) {
     const mensaje = document.getElementById(
         "mensaje-clientes"
     );
 
     mensaje.textContent = texto;
     mensaje.className = tipo;
+}
+
+function actualizarContadorClientes() {
+    const contador = document.getElementById("clientes");
+
+    if (contador !== null) {
+        contador.textContent = clientes.length;
+    }
 }

@@ -189,12 +189,9 @@ function cargarProductos() {
 }
 
 function guardarProductos() {
-    const productosConvertidosATexto =
-        JSON.stringify(productos);
-
     localStorage.setItem(
         CLAVE_PRODUCTOS,
-        productosConvertidosATexto
+        JSON.stringify(productos)
     );
 }
 
@@ -333,6 +330,8 @@ function actualizarProducto(
 }
 
 function mostrarProductos() {
+    actualizarContadorProductos();
+
     const listaProductos = document.getElementById(
         "lista-productos"
     );
@@ -554,4 +553,12 @@ function mostrarMensajeProducto(texto, tipo) {
 
     mensaje.textContent = texto;
     mensaje.className = tipo;
+}
+
+function actualizarContadorProductos() {
+    const contador = document.getElementById("productos");
+
+    if (contador !== null) {
+        contador.textContent = productos.length;
+    }
 }
