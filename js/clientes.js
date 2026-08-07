@@ -1,3 +1,4 @@
+```javascript
 const CLAVE_CLIENTES = "clientes";
 
 let clientes = cargarClientes();
@@ -9,6 +10,7 @@ document.addEventListener(
 );
 
 function iniciarModuloClientes() {
+
     const moduloClientes = document.getElementById(
         "modulo-clientes"
     );
@@ -23,15 +25,23 @@ function iniciarModuloClientes() {
 
     moduloClientes.innerHTML = `
         <section class="modulo-administrativo">
-            <header class="encabezado-modulo">
-                <h2>Administración de clientes</h2>
 
-                <p>
-                    Registra, consulta, edita y elimina clientes.
-                </p>
+            <header class="encabezado-modulo">
+                <div>
+                    <h2>Administración de clientes</h2>
+                    <p>
+                        Registra, consulta, edita y elimina clientes.
+                    </p>
+                </div>
+
+                <span class="contador-modulo">
+                    <strong id="contador-clientes-modulo">0</strong>
+                    clientes
+                </span>
             </header>
 
             <form id="formulario-clientes">
+
                 <div class="grupo-formulario">
                     <label for="cliente-nombre">
                         Nombre completo
@@ -83,6 +93,7 @@ function iniciarModuloClientes() {
                 </div>
 
                 <div class="acciones-formulario">
+
                     <button
                         id="boton-guardar-cliente"
                         type="submit"
@@ -97,6 +108,7 @@ function iniciarModuloClientes() {
                     >
                         Cancelar edición
                     </button>
+
                 </div>
 
                 <p
@@ -104,10 +116,13 @@ function iniciarModuloClientes() {
                     role="status"
                     aria-live="polite"
                 ></p>
+
             </form>
 
             <div class="contenedor-tabla">
+
                 <table>
+
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -119,8 +134,11 @@ function iniciarModuloClientes() {
                     </thead>
 
                     <tbody id="lista-clientes"></tbody>
+
                 </table>
+
             </div>
+
         </section>
     `;
 
@@ -155,6 +173,7 @@ function iniciarModuloClientes() {
 }
 
 function cargarClientes() {
+
     const clientesGuardados =
         localStorage.getItem(CLAVE_CLIENTES);
 
@@ -163,16 +182,16 @@ function cargarClientes() {
     }
 
     try {
-        const datosConvertidos = JSON.parse(
-            clientesGuardados
-        );
 
-        if (Array.isArray(datosConvertidos)) {
-            return datosConvertidos;
-        }
+        const datosConvertidos =
+            JSON.parse(clientesGuardados);
 
-        return [];
+        return Array.isArray(datosConvertidos)
+            ? datosConvertidos
+            : [];
+
     } catch (error) {
+
         console.error(
             "No se pudieron cargar los clientes:",
             error
@@ -183,6 +202,7 @@ function cargarClientes() {
 }
 
 function guardarClientes() {
+
     localStorage.setItem(
         CLAVE_CLIENTES,
         JSON.stringify(clientes)
@@ -190,6 +210,7 @@ function guardarClientes() {
 }
 
 function procesarFormularioCliente(evento) {
+
     evento.preventDefault();
 
     const nombre = document
@@ -217,6 +238,7 @@ function procesarFormularioCliente(evento) {
         telefono === "" ||
         estado === ""
     ) {
+
         mostrarMensajeCliente(
             "Todos los campos son obligatorios.",
             "error"
@@ -226,13 +248,16 @@ function procesarFormularioCliente(evento) {
     }
 
     if (clienteEditandoId === null) {
+
         registrarCliente(
             nombre,
             correo,
             telefono,
             estado
         );
+
     } else {
+
         actualizarCliente(
             nombre,
             correo,
@@ -252,11 +277,17 @@ function registrarCliente(
     telefono,
     estado
 ) {
+
     const nuevoCliente = {
+
         id: Date.now(),
+
         nombre: nombre,
+
         correo: correo,
+
         telefono: telefono,
+
         estado: estado
     };
 
@@ -274,13 +305,17 @@ function actualizarCliente(
     telefono,
     estado
 ) {
+
     const clienteEncontrado = clientes.find(
         function (cliente) {
+
             return cliente.id === clienteEditandoId;
+
         }
     );
 
     if (clienteEncontrado === undefined) {
+
         mostrarMensajeCliente(
             "No se encontró el cliente.",
             "error"
@@ -301,30 +336,43 @@ function actualizarCliente(
 }
 
 function mostrarClientes() {
+
     actualizarContadorClientes();
 
     const listaClientes = document.getElementById(
         "lista-clientes"
     );
 
+    if (!listaClientes) {
+        return;
+    }
+
     listaClientes.innerHTML = "";
 
     if (clientes.length === 0) {
-        const filaVacia = document.createElement("tr");
-        const celdaVacia = document.createElement("td");
+
+        const filaVacia =
+            document.createElement("tr");
+
+        const celdaVacia =
+            document.createElement("td");
 
         celdaVacia.colSpan = 5;
+
         celdaVacia.textContent =
             "No hay clientes registrados.";
 
         filaVacia.appendChild(celdaVacia);
+
         listaClientes.appendChild(filaVacia);
 
         return;
     }
 
     clientes.forEach(function (cliente) {
-        const fila = document.createElement("tr");
+
+        const fila =
+            document.createElement("tr");
 
         fila.appendChild(
             crearCeldaCliente(cliente.nombre)
@@ -361,16 +409,28 @@ function mostrarClientes() {
         botonEliminar.dataset.accion = "eliminar";
         botonEliminar.dataset.id = cliente.id;
 
-        celdaAcciones.appendChild(botonEditar);
-        celdaAcciones.appendChild(botonEliminar);
+        celdaAcciones.appendChild(
+            botonEditar
+        );
 
-        fila.appendChild(celdaAcciones);
-        listaClientes.appendChild(fila);
+        celdaAcciones.appendChild(
+            botonEliminar
+        );
+
+        fila.appendChild(
+            celdaAcciones
+        );
+
+        listaClientes.appendChild(
+            fila
+        );
     });
 }
 
 function crearCeldaCliente(contenido) {
-    const celda = document.createElement("td");
+
+    const celda =
+        document.createElement("td");
 
     celda.textContent = contenido;
 
@@ -378,6 +438,7 @@ function crearCeldaCliente(contenido) {
 }
 
 function procesarAccionCliente(evento) {
+
     const botonPresionado =
         evento.target.closest("button");
 
@@ -385,29 +446,42 @@ function procesarAccionCliente(evento) {
         return;
     }
 
-    const accion = botonPresionado.dataset.accion;
+    const accion =
+        botonPresionado.dataset.accion;
 
-    const idCliente = Number(
-        botonPresionado.dataset.id
-    );
+    const idCliente =
+        Number(
+            botonPresionado.dataset.id
+        );
 
     if (accion === "editar") {
-        prepararEdicionCliente(idCliente);
+
+        prepararEdicionCliente(
+            idCliente
+        );
     }
 
     if (accion === "eliminar") {
-        eliminarCliente(idCliente);
+
+        eliminarCliente(
+            idCliente
+        );
     }
 }
 
 function prepararEdicionCliente(idCliente) {
-    const clienteEncontrado = clientes.find(
-        function (cliente) {
-            return cliente.id === idCliente;
-        }
-    );
+
+    const clienteEncontrado =
+        clientes.find(
+            function (cliente) {
+
+                return cliente.id === idCliente;
+
+            }
+        );
 
     if (clienteEncontrado === undefined) {
+
         mostrarMensajeCliente(
             "No se encontró el cliente.",
             "error"
@@ -418,25 +492,31 @@ function prepararEdicionCliente(idCliente) {
 
     document.getElementById(
         "cliente-nombre"
-    ).value = clienteEncontrado.nombre;
+    ).value =
+        clienteEncontrado.nombre;
 
     document.getElementById(
         "cliente-correo"
-    ).value = clienteEncontrado.correo;
+    ).value =
+        clienteEncontrado.correo;
 
     document.getElementById(
         "cliente-telefono"
-    ).value = clienteEncontrado.telefono;
+    ).value =
+        clienteEncontrado.telefono;
 
     document.getElementById(
         "cliente-estado"
-    ).value = clienteEncontrado.estado;
+    ).value =
+        clienteEncontrado.estado;
 
-    clienteEditandoId = idCliente;
+    clienteEditandoId =
+        idCliente;
 
     document.getElementById(
         "boton-guardar-cliente"
-    ).textContent = "Guardar cambios";
+    ).textContent =
+        "Guardar cambios";
 
     document.getElementById(
         "boton-cancelar-edicion"
@@ -449,25 +529,35 @@ function prepararEdicionCliente(idCliente) {
 }
 
 function eliminarCliente(idCliente) {
-    const confirmarEliminacion = confirm(
-        "¿Deseas eliminar este cliente?"
-    );
+
+    const confirmarEliminacion =
+        confirm(
+            "¿Deseas eliminar este cliente?"
+        );
 
     if (confirmarEliminacion === false) {
         return;
     }
 
-    clientes = clientes.filter(
-        function (cliente) {
-            return cliente.id !== idCliente;
-        }
-    );
+    clientes =
+        clientes.filter(
+            function (cliente) {
+
+                return cliente.id !== idCliente;
+
+            }
+        );
 
     guardarClientes();
+
     mostrarClientes();
 
-    if (clienteEditandoId === idCliente) {
+    if (
+        clienteEditandoId === idCliente
+    ) {
+
         limpiarFormularioCliente();
+
     }
 
     mostrarMensajeCliente(
@@ -477,6 +567,7 @@ function eliminarCliente(idCliente) {
 }
 
 function cancelarEdicionCliente() {
+
     limpiarFormularioCliente();
 
     mostrarMensajeCliente(
@@ -486,9 +577,11 @@ function cancelarEdicionCliente() {
 }
 
 function limpiarFormularioCliente() {
-    const formulario = document.getElementById(
-        "formulario-clientes"
-    );
+
+    const formulario =
+        document.getElementById(
+            "formulario-clientes"
+        );
 
     formulario.reset();
 
@@ -496,26 +589,55 @@ function limpiarFormularioCliente() {
 
     document.getElementById(
         "boton-guardar-cliente"
-    ).textContent = "Registrar cliente";
+    ).textContent =
+        "Registrar cliente";
 
     document.getElementById(
         "boton-cancelar-edicion"
     ).hidden = true;
 }
 
-function mostrarMensajeCliente(texto, tipo) {
-    const mensaje = document.getElementById(
-        "mensaje-clientes"
-    );
+function mostrarMensajeCliente(
+    texto,
+    tipo
+) {
+
+    const mensaje =
+        document.getElementById(
+            "mensaje-clientes"
+        );
+
+    if (!mensaje) {
+        return;
+    }
 
     mensaje.textContent = texto;
+
     mensaje.className = tipo;
 }
 
 function actualizarContadorClientes() {
-    const contador = document.getElementById("clientes");
 
-    if (contador !== null) {
-        contador.textContent = clientes.length;
+    const contadorDashboard =
+        document.getElementById(
+            "clientes-count"
+        );
+
+    if (contadorDashboard) {
+
+        contadorDashboard.textContent =
+            clientes.length;
+    }
+
+    const contadorModulo =
+        document.getElementById(
+            "contador-clientes-modulo"
+        );
+
+    if (contadorModulo) {
+
+        contadorModulo.textContent =
+            clientes.length;
     }
 }
+```
