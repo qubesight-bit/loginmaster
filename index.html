@@ -1,77 +1,131 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>LoginMaster - Login</title>
+    <title>LoginMaster - Iniciar sesión</title>
 
-<link rel="stylesheet" href="css/style.css">
-```
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 
 <body>
 
-```
-<div class="login-container">
+    <main class="login-container">
 
-    <div class="login-card">
+        <section class="login-card">
 
-        <h1>LoginMaster</h1>
+            <div class="login-logo">
+                <div class="logo-icon">
+                    LM
+                </div>
 
-        <h2>Iniciar sesión</h2>
+                <div>
+                    <h1>LoginMaster</h1>
+                    <span>Sistema Administrativo</span>
+                </div>
+            </div>
 
-        <form id="loginForm">
+            <div class="login-header">
 
-            <div class="form-group">
+                <h2>Bienvenido</h2>
 
-                <label for="usuario">
-                    Usuario
-                </label>
-
-                <input
-                    type="text"
-                    id="usuario"
-                    name="usuario"
-                    placeholder="Ingrese su usuario"
-                    required
-                >
+                <p>
+                    Inicia sesión para acceder al sistema
+                </p>
 
             </div>
 
-            <div class="form-group">
+            <form id="loginForm">
 
-                <label for="password">
-                    Contraseña
-                </label>
+                <div class="form-group">
 
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Ingrese su contraseña"
-                    required
+                    <label for="usuario">
+                        Usuario
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            👤
+                        </span>
+
+                        <input
+                            type="text"
+                            id="usuario"
+                            name="usuario"
+                            placeholder="Ingrese su usuario"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Ingrese su contraseña"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn-primary login-button"
                 >
+                    <span>Ingresar al sistema</span>
+                    <span class="button-arrow">→</span>
+                </button>
 
+                <div
+                    id="mensaje"
+                    class="mensaje"
+                    role="alert"
+                ></div>
+
+            </form>
+
+            <div class="login-footer">
+                <span>LoginMaster</span>
+                <span>•</span>
+                <span>Sistema Administrativo Web</span>
             </div>
 
-            <button type="submit">
-                Iniciar sesión
-            </button>
+        </section>
 
-            <div id="mensaje" class="mensaje"></div>
+    </main>
 
-        </form>
-
-    </div>
-
-</div>
-
-<script src="./js/login.js"></script>
+    <script src="./js/login.js"></script>
 
 </body>
 </html>

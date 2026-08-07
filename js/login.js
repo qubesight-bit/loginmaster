@@ -25,7 +25,7 @@ formulario.addEventListener("submit", function (evento) {
   const passwordIngresada = document.getElementById("password").value;
 
   console.log("Usuario:", usuarioIngresado);
-  console.log("Contraseña:", passwordIngresada);
+  // 🔴 Línea eliminada: ya no se imprime la contraseña en consola
 
   const usuarioEncontrado = usuarios.find(function (item) {
     return item.usuario === usuarioIngresado &&
