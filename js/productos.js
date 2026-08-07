@@ -1,3 +1,4 @@
+```javascript
 const CLAVE_PRODUCTOS = "productos";
 
 let productos = cargarProductos();
@@ -9,29 +10,35 @@ document.addEventListener(
 );
 
 function iniciarModuloProductos() {
-    const moduloProductos = document.getElementById(
-        "modulo-productos"
-    );
 
-    if (moduloProductos === null) {
-        console.warn(
-            "No se encontró el elemento modulo-productos."
+    const moduloProductos =
+        document.getElementById(
+            "modulo-productos"
         );
 
+    if (!moduloProductos) {
         return;
     }
 
     moduloProductos.innerHTML = `
         <section class="modulo-administrativo">
-            <header class="encabezado-modulo">
-                <h2>Administración de productos</h2>
 
-                <p>
-                    Registra, consulta, edita y elimina productos.
-                </p>
+            <header class="encabezado-modulo">
+                <div>
+                    <h2>Administración de productos</h2>
+                    <p>
+                        Registra, consulta, edita y elimina productos.
+                    </p>
+                </div>
+
+                <span class="contador-modulo">
+                    <strong id="contador-productos-modulo">0</strong>
+                    productos
+                </span>
             </header>
 
             <form id="formulario-productos">
+
                 <div class="grupo-formulario">
                     <label for="producto-nombre">
                         Nombre del producto
@@ -89,6 +96,7 @@ function iniciarModuloProductos() {
                 </div>
 
                 <div class="acciones-formulario">
+
                     <button
                         id="boton-guardar-producto"
                         type="submit"
@@ -103,6 +111,7 @@ function iniciarModuloProductos() {
                     >
                         Cancelar edición
                     </button>
+
                 </div>
 
                 <p
@@ -110,10 +119,13 @@ function iniciarModuloProductos() {
                     role="status"
                     aria-live="polite"
                 ></p>
+
             </form>
 
             <div class="contenedor-tabla">
+
                 <table>
+
                     <thead>
                         <tr>
                             <th>Producto</th>
@@ -125,22 +137,28 @@ function iniciarModuloProductos() {
                     </thead>
 
                     <tbody id="lista-productos"></tbody>
+
                 </table>
+
             </div>
+
         </section>
     `;
 
-    const formulario = document.getElementById(
-        "formulario-productos"
-    );
+    const formulario =
+        document.getElementById(
+            "formulario-productos"
+        );
 
-    const listaProductos = document.getElementById(
-        "lista-productos"
-    );
+    const listaProductos =
+        document.getElementById(
+            "lista-productos"
+        );
 
-    const botonCancelar = document.getElementById(
-        "boton-cancelar-producto"
-    );
+    const botonCancelar =
+        document.getElementById(
+            "boton-cancelar-producto"
+        );
 
     formulario.addEventListener(
         "submit",
@@ -161,26 +179,29 @@ function iniciarModuloProductos() {
 }
 
 function cargarProductos() {
-    const productosGuardados =
-        localStorage.getItem(CLAVE_PRODUCTOS);
 
-    if (productosGuardados === null) {
+    const guardados =
+        localStorage.getItem(
+            CLAVE_PRODUCTOS
+        );
+
+    if (!guardados) {
         return [];
     }
 
     try {
-        const datosConvertidos = JSON.parse(
-            productosGuardados
-        );
 
-        if (Array.isArray(datosConvertidos)) {
-            return datosConvertidos;
-        }
+        const datos =
+            JSON.parse(guardados);
 
-        return [];
+        return Array.isArray(datos)
+            ? datos
+            : [];
+
     } catch (error) {
+
         console.error(
-            "No se pudieron cargar los productos:",
+            "Error cargando productos:",
             error
         );
 
@@ -189,6 +210,7 @@ function cargarProductos() {
 }
 
 function guardarProductos() {
+
     localStorage.setItem(
         CLAVE_PRODUCTOS,
         JSON.stringify(productos)
@@ -196,25 +218,28 @@ function guardarProductos() {
 }
 
 function procesarFormularioProducto(evento) {
+
     evento.preventDefault();
 
-    const nombre = document
-        .getElementById("producto-nombre")
-        .value
-        .trim();
+    const nombre =
+        document.getElementById(
+            "producto-nombre"
+        ).value.trim();
 
-    const categoria = document
-        .getElementById("producto-categoria")
-        .value
-        .trim();
+    const categoria =
+        document.getElementById(
+            "producto-categoria"
+        ).value.trim();
 
-    const precioIngresado = document
-        .getElementById("producto-precio")
-        .value;
+    const precioIngresado =
+        document.getElementById(
+            "producto-precio"
+        ).value;
 
-    const existenciasIngresadas = document
-        .getElementById("producto-existencias")
-        .value;
+    const existenciasIngresadas =
+        document.getElementById(
+            "producto-existencias"
+        ).value;
 
     if (
         nombre === "" ||
@@ -222,6 +247,7 @@ function procesarFormularioProducto(evento) {
         precioIngresado === "" ||
         existenciasIngresadas === ""
     ) {
+
         mostrarMensajeProducto(
             "Todos los campos son obligatorios.",
             "error"
@@ -230,10 +256,14 @@ function procesarFormularioProducto(evento) {
         return;
     }
 
-    const precio = Number(precioIngresado);
-    const existencias = Number(existenciasIngresadas);
+    const precio =
+        Number(precioIngresado);
+
+    const existencias =
+        Number(existenciasIngresadas);
 
     if (precio <= 0) {
+
         mostrarMensajeProducto(
             "El precio debe ser mayor que cero.",
             "error"
@@ -244,8 +274,9 @@ function procesarFormularioProducto(evento) {
 
     if (
         existencias < 0 ||
-        Number.isInteger(existencias) === false
+        !Number.isInteger(existencias)
     ) {
+
         mostrarMensajeProducto(
             "Las existencias deben ser un número entero positivo.",
             "error"
@@ -255,13 +286,16 @@ function procesarFormularioProducto(evento) {
     }
 
     if (productoEditandoId === null) {
+
         registrarProducto(
             nombre,
             categoria,
             precio,
             existencias
         );
+
     } else {
+
         actualizarProducto(
             nombre,
             categoria,
@@ -271,7 +305,9 @@ function procesarFormularioProducto(evento) {
     }
 
     guardarProductos();
+
     mostrarProductos();
+
     limpiarFormularioProducto();
 }
 
@@ -281,15 +317,19 @@ function registrarProducto(
     precio,
     existencias
 ) {
-    const nuevoProducto = {
-        id: Date.now(),
-        nombre: nombre,
-        categoria: categoria,
-        precio: precio,
-        existencias: existencias
-    };
 
-    productos.push(nuevoProducto);
+    productos.push({
+
+        id: Date.now(),
+
+        nombre,
+
+        categoria,
+
+        precio,
+
+        existencias
+    });
 
     mostrarMensajeProducto(
         "Producto registrado correctamente.",
@@ -303,13 +343,14 @@ function actualizarProducto(
     precio,
     existencias
 ) {
-    const productoEncontrado = productos.find(
-        function (producto) {
-            return producto.id === productoEditandoId;
-        }
-    );
 
-    if (productoEncontrado === undefined) {
+    const producto =
+        productos.find(
+            p => p.id === productoEditandoId
+        );
+
+    if (!producto) {
+
         mostrarMensajeProducto(
             "No se encontró el producto.",
             "error"
@@ -318,10 +359,10 @@ function actualizarProducto(
         return;
     }
 
-    productoEncontrado.nombre = nombre;
-    productoEncontrado.categoria = categoria;
-    productoEncontrado.precio = precio;
-    productoEncontrado.existencias = existencias;
+    producto.nombre = nombre;
+    producto.categoria = categoria;
+    producto.precio = precio;
+    producto.existencias = existencias;
 
     mostrarMensajeProducto(
         "Producto actualizado correctamente.",
@@ -330,156 +371,136 @@ function actualizarProducto(
 }
 
 function mostrarProductos() {
+
     actualizarContadorProductos();
 
-    const listaProductos = document.getElementById(
-        "lista-productos"
-    );
+    const lista =
+        document.getElementById(
+            "lista-productos"
+        );
 
-    listaProductos.innerHTML = "";
+    if (!lista) {
+        return;
+    }
+
+    lista.innerHTML = "";
 
     if (productos.length === 0) {
-        const filaVacia = document.createElement("tr");
-        const celdaVacia = document.createElement("td");
 
-        celdaVacia.colSpan = 5;
-        celdaVacia.textContent =
-            "No hay productos registrados.";
-
-        filaVacia.appendChild(celdaVacia);
-        listaProductos.appendChild(filaVacia);
+        lista.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    No hay productos registrados.
+                </td>
+            </tr>
+        `;
 
         return;
     }
 
-    productos.forEach(function (producto) {
-        const fila = document.createElement("tr");
+    productos.forEach(producto => {
 
-        fila.appendChild(
-            crearCeldaProducto(producto.nombre)
-        );
+        const fila =
+            document.createElement("tr");
 
-        fila.appendChild(
-            crearCeldaProducto(producto.categoria)
-        );
+        fila.innerHTML = `
+            <td>${producto.nombre}</td>
+            <td>${producto.categoria}</td>
+            <td>${formatearPrecio(producto.precio)}</td>
+            <td>${producto.existencias}</td>
+            <td>
+                <button
+                    type="button"
+                    data-accion="editar"
+                    data-id="${producto.id}"
+                >
+                    Editar
+                </button>
 
-        fila.appendChild(
-            crearCeldaProducto(
-                formatearPrecio(producto.precio)
-            )
-        );
+                <button
+                    type="button"
+                    data-accion="eliminar"
+                    data-id="${producto.id}"
+                >
+                    Eliminar
+                </button>
+            </td>
+        `;
 
-        fila.appendChild(
-            crearCeldaProducto(producto.existencias)
-        );
-
-        const celdaAcciones =
-            document.createElement("td");
-
-        const botonEditar =
-            document.createElement("button");
-
-        botonEditar.type = "button";
-        botonEditar.textContent = "Editar";
-        botonEditar.dataset.accion = "editar";
-        botonEditar.dataset.id = producto.id;
-
-        const botonEliminar =
-            document.createElement("button");
-
-        botonEliminar.type = "button";
-        botonEliminar.textContent = "Eliminar";
-        botonEliminar.dataset.accion = "eliminar";
-        botonEliminar.dataset.id = producto.id;
-
-        celdaAcciones.appendChild(botonEditar);
-        celdaAcciones.appendChild(botonEliminar);
-
-        fila.appendChild(celdaAcciones);
-        listaProductos.appendChild(fila);
+        lista.appendChild(fila);
     });
 }
 
-function crearCeldaProducto(contenido) {
-    const celda = document.createElement("td");
-
-    celda.textContent = contenido;
-
-    return celda;
-}
-
 function formatearPrecio(precio) {
-    const formatoColones = new Intl.NumberFormat(
+
+    return new Intl.NumberFormat(
         "es-CR",
         {
             style: "currency",
             currency: "CRC"
         }
-    );
-
-    return formatoColones.format(precio);
+    ).format(precio);
 }
 
 function procesarAccionProducto(evento) {
-    const botonPresionado =
+
+    const boton =
         evento.target.closest("button");
 
-    if (botonPresionado === null) {
+    if (!boton) {
         return;
     }
 
-    const accion = botonPresionado.dataset.accion;
+    const id =
+        Number(boton.dataset.id);
 
-    const idProducto = Number(
-        botonPresionado.dataset.id
-    );
+    if (
+        boton.dataset.accion === "editar"
+    ) {
 
-    if (accion === "editar") {
-        prepararEdicionProducto(idProducto);
-    }
+        prepararEdicionProducto(id);
 
-    if (accion === "eliminar") {
-        eliminarProducto(idProducto);
+    } else if (
+        boton.dataset.accion === "eliminar"
+    ) {
+
+        eliminarProducto(id);
     }
 }
 
-function prepararEdicionProducto(idProducto) {
-    const productoEncontrado = productos.find(
-        function (producto) {
-            return producto.id === idProducto;
-        }
-    );
+function prepararEdicionProducto(id) {
 
-    if (productoEncontrado === undefined) {
-        mostrarMensajeProducto(
-            "No se encontró el producto.",
-            "error"
+    const producto =
+        productos.find(
+            p => p.id === id
         );
 
+    if (!producto) {
         return;
     }
 
     document.getElementById(
         "producto-nombre"
-    ).value = productoEncontrado.nombre;
+    ).value = producto.nombre;
 
     document.getElementById(
         "producto-categoria"
-    ).value = productoEncontrado.categoria;
+    ).value = producto.categoria;
 
     document.getElementById(
         "producto-precio"
-    ).value = productoEncontrado.precio;
+    ).value = producto.precio;
 
     document.getElementById(
         "producto-existencias"
-    ).value = productoEncontrado.existencias;
+    ).value = producto.existencias;
 
-    productoEditandoId = idProducto;
+    productoEditandoId = id;
 
     document.getElementById(
         "boton-guardar-producto"
-    ).textContent = "Guardar cambios";
+    ).textContent =
+        "Guardar cambios";
 
     document.getElementById(
         "boton-cancelar-producto"
@@ -491,25 +512,26 @@ function prepararEdicionProducto(idProducto) {
     );
 }
 
-function eliminarProducto(idProducto) {
-    const confirmarEliminacion = confirm(
-        "¿Deseas eliminar este producto?"
-    );
+function eliminarProducto(id) {
 
-    if (confirmarEliminacion === false) {
+    if (
+        !confirm(
+            "¿Deseas eliminar este producto?"
+        )
+    ) {
         return;
     }
 
-    productos = productos.filter(
-        function (producto) {
-            return producto.id !== idProducto;
-        }
-    );
+    productos =
+        productos.filter(
+            p => p.id !== id
+        );
 
     guardarProductos();
+
     mostrarProductos();
 
-    if (productoEditandoId === idProducto) {
+    if (productoEditandoId === id) {
         limpiarFormularioProducto();
     }
 
@@ -520,6 +542,7 @@ function eliminarProducto(idProducto) {
 }
 
 function cancelarEdicionProducto() {
+
     limpiarFormularioProducto();
 
     mostrarMensajeProducto(
@@ -529,36 +552,63 @@ function cancelarEdicionProducto() {
 }
 
 function limpiarFormularioProducto() {
-    const formulario = document.getElementById(
-        "formulario-productos"
-    );
 
-    formulario.reset();
+    document.getElementById(
+        "formulario-productos"
+    ).reset();
 
     productoEditandoId = null;
 
     document.getElementById(
         "boton-guardar-producto"
-    ).textContent = "Registrar producto";
+    ).textContent =
+        "Registrar producto";
 
     document.getElementById(
         "boton-cancelar-producto"
     ).hidden = true;
 }
 
-function mostrarMensajeProducto(texto, tipo) {
-    const mensaje = document.getElementById(
-        "mensaje-productos"
-    );
+function mostrarMensajeProducto(
+    texto,
+    tipo
+) {
+
+    const mensaje =
+        document.getElementById(
+            "mensaje-productos"
+        );
+
+    if (!mensaje) {
+        return;
+    }
 
     mensaje.textContent = texto;
     mensaje.className = tipo;
 }
 
 function actualizarContadorProductos() {
-    const contador = document.getElementById("productos");
 
-    if (contador !== null) {
-        contador.textContent = productos.length;
+    const contadorDashboard =
+        document.getElementById(
+            "productos-count"
+        );
+
+    if (contadorDashboard) {
+
+        contadorDashboard.textContent =
+            productos.length;
+    }
+
+    const contadorModulo =
+        document.getElementById(
+            "contador-productos-modulo"
+        );
+
+    if (contadorModulo) {
+
+        contadorModulo.textContent =
+            productos.length;
     }
 }
+```

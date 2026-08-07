@@ -1,0 +1,608 @@
+﻿/* ============================================================
+   LOGINMASTER
+   LOGIN PROFESIONAL
+   ============================================================ */
+
+body {
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   CONTENEDOR
+   ============================================================ */
+
+.login-container {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    overflow: hidden;
+
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(2, 6, 23, 0.92),
+            rgba(30, 64, 175, 0.84)
+        ),
+
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=90");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+/* ============================================================
+   EFECTOS DE FONDO
+   ============================================================ */
+
+.login-container::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    top: -260px;
+    left: -220px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(59, 130, 246, 0.22);
+
+    filter: blur(10px);
+
+    pointer-events: none;
+}
+
+
+.login-container::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -240px;
+    bottom: -260px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(124, 58, 237, 0.20);
+
+    filter: blur(10px);
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   TARJETA
+   ============================================================ */
+
+.login-card {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+    max-width: 430px;
+
+    padding: 40px;
+
+    margin: auto;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.6);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.35);
+
+    animation:
+        loginAppear 0.55s ease;
+}
+
+
+@keyframes loginAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+}
+
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+
+.login-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 13px;
+
+    margin-bottom: 30px;
+}
+
+
+.logo-icon {
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 20px
+        rgba(37, 99, 235, 0.30);
+}
+
+
+.login-logo h1 {
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    color: #0f172a;
+}
+
+
+.login-logo span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.login-header {
+
+    margin-bottom: 25px;
+
+    text-align: left;
+}
+
+
+.login-header h2 {
+
+    margin-bottom: 6px;
+
+    color: #0f172a;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+
+.login-header p {
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   FORMULARIO
+   ============================================================ */
+
+.form-group {
+
+    width: 100%;
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #334155;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   INPUT
+   ============================================================ */
+
+.input-wrapper {
+
+    position: relative;
+
+    width: 100%;
+}
+
+
+.input-icon {
+
+    position: absolute;
+
+    left: 14px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size: 15px;
+
+    pointer-events: none;
+
+    opacity: 0.7;
+}
+
+
+.input-wrapper input {
+
+    display: block;
+
+    width: 100%;
+
+    height: 50px;
+
+    padding:
+        0
+        14px
+        0
+        43px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    color: #0f172a;
+
+    background: #f8fafc;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.input-wrapper input:hover {
+
+    background: white;
+}
+
+
+.input-wrapper input:focus {
+
+    background: white;
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+.input-wrapper input::placeholder {
+    color: #94a3b8;
+}
+
+
+/* ============================================================
+   BOTÓN
+   ============================================================ */
+
+.login-button {
+
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 5px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        0 17px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 20px
+        rgba(37, 99, 235, 0.25);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.login-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 28px
+        rgba(37, 99, 235, 0.32);
+}
+
+
+.login-button:active {
+
+    transform:
+        translateY(0);
+}
+
+
+.button-arrow {
+
+    font-size: 20px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.login-button:hover
+.button-arrow {
+
+    transform:
+        translateX(4px);
+}
+
+
+/* ============================================================
+   MENSAJES
+   ============================================================ */
+
+.mensaje {
+
+    width: 100%;
+
+    margin-top: 14px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+.mensaje:empty {
+    display: none;
+}
+
+
+.mensaje.error {
+
+    color: #991b1b;
+
+    background: #fef2f2;
+
+    border:
+        1px solid #fecaca;
+}
+
+
+.mensaje.exito {
+
+    color: #166534;
+
+    background: #f0fdf4;
+
+    border:
+        1px solid #bbf7d0;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.login-footer {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #e2e8f0;
+
+    color: #94a3b8;
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 500px) {
+
+    .login-container {
+        padding: 15px;
+    }
+
+
+    .login-card {
+
+        max-width: 100%;
+
+        padding: 30px 23px;
+
+        border-radius: 16px;
+    }
+
+
+    .login-logo {
+        margin-bottom: 24px;
+    }
+
+
+    .logo-icon {
+
+        width: 46px;
+        height: 46px;
+
+        border-radius: 12px;
+    }
+
+
+    .login-logo h1 {
+        font-size: 20px;
+    }
+
+
+    .login-header h2 {
+        font-size: 22px;
+    }
+}
+
+
+@media (max-height: 620px) {
+
+    .login-container {
+
+        align-items: flex-start;
+
+        overflow-y: auto;
+
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}

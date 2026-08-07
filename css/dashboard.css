@@ -1,0 +1,1720 @@
+﻿/* ============================================================
+   LOGINMASTER
+   DASHBOARD.CSS
+   ============================================================ */
+
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --primary-light: #eef2ff;
+
+    --bg: #f1f5f9;
+    --surface: #ffffff;
+    --surface-soft: #f8fafc;
+
+    --text: #0f172a;
+    --text-soft: #64748b;
+    --text-muted: #94a3b8;
+
+    --border: #e2e8f0;
+    --border-dark: #cbd5e1;
+
+    --success: #16a34a;
+    --danger: #dc2626;
+    --warning: #d97706;
+
+    --sidebar-width: 245px;
+
+    --shadow:
+        0 4px 15px rgba(15, 23, 42, 0.05);
+
+    --shadow-hover:
+        0 12px 30px rgba(15, 23, 42, 0.10);
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* ============================================================
+   DASHBOARD GENERAL
+   ============================================================ */
+
+.dashboard-container {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+
+    background: var(--bg);
+}
+
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    width: var(--sidebar-width);
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 22px 15px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0f172a 0%,
+            #172554 100%
+        );
+
+    box-shadow:
+        4px 0 25px
+        rgba(15, 23, 42, 0.16);
+
+    overflow-y: auto;
+}
+
+
+/* ============================================================
+   MARCA
+   ============================================================ */
+
+.sidebar-header {
+    padding: 3px 10px 20px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.10);
+}
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 11px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    font-size: 13px;
+    font-weight: 800;
+
+    box-shadow:
+        0 7px 18px
+        rgba(37, 99, 235, 0.25);
+}
+
+.brand-text h2 {
+    margin: 0;
+
+    color: white;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.brand-text span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #94a3b8;
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+.badge {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 3px 8px;
+
+    border-radius: 20px;
+
+    color: #bfdbfe;
+
+    background:
+        rgba(59, 130, 246, 0.16);
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   MENÚ
+   ============================================================ */
+
+.sidebar-menu {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-top: 25px;
+}
+
+.menu-item {
+    width: 100%;
+    min-height: 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 12px;
+
+    border-radius: 9px;
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.menu-item:hover {
+    color: white;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    transform:
+        translateX(2px);
+}
+
+/*
+   IMPORTANTE:
+   No dejamos ningún elemento permanentemente
+   "presionado". El estado activo se controla
+   únicamente cuando realmente tiene la clase active.
+*/
+
+.menu-item.active {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+
+    box-shadow:
+        0 5px 16px
+        rgba(37, 99, 235, 0.25);
+}
+
+.menu-item .icon {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   FOOTER SIDEBAR
+   ============================================================ */
+
+.sidebar-footer {
+    width: 100%;
+
+    margin-top: auto;
+
+    padding-top: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.10);
+}
+
+.theme-button,
+.logout-button {
+    width: 100%;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 0 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.theme-button {
+    color: #cbd5e1;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+.theme-button:hover {
+    color: white;
+
+    background:
+        rgba(255, 255, 255, 0.13);
+
+    transform: translateY(-1px);
+}
+
+.logout-button {
+    color: #fecaca;
+
+    background:
+        rgba(220, 38, 38, 0.12);
+}
+
+.logout-button:hover {
+    color: white;
+
+    background: #dc2626;
+
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   CONTENIDO PRINCIPAL
+   ============================================================ */
+
+.main-content {
+    width:
+        calc(100% - var(--sidebar-width));
+
+    min-width: 0;
+    min-height: 100vh;
+
+    margin-left: var(--sidebar-width);
+
+    padding-bottom: 50px;
+
+    background: var(--bg);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.dashboard-header {
+    width: 100%;
+    min-height: 92px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 20px 30px;
+
+    background: var(--surface);
+
+    border-bottom:
+        1px solid var(--border);
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.header-info {
+    min-width: 0;
+}
+
+.header-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.header-title h1 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 22px;
+    font-weight: 800;
+
+    letter-spacing: -0.4px;
+}
+
+.header-badge {
+    padding: 4px 7px;
+
+    border-radius: 5px;
+
+    color: var(--primary);
+
+    background: var(--primary-light);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+}
+
+.header-info p {
+    margin: 5px 0 0;
+
+    color: var(--text-soft);
+
+    font-size: 12px;
+}
+
+.header-info strong {
+    color: #2563eb;
+}
+
+
+/* ============================================================
+   CONTROLES EXCEL
+   ============================================================ */
+
+.excel-controls {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+#clearDataBtn {
+    color: #b45309;
+
+    background: #fff7ed;
+
+    border: 1px solid #fdba74;
+}
+
+#clearDataBtn:hover {
+    background: #ffedd5;
+
+    color: #92400e;
+}
+
+.btn-secondary,
+.excel-controls .btn-primary {
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 14px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.btn-secondary {
+    color: #334155;
+
+    background: white;
+
+    border:
+        1px solid #cbd5e1;
+}
+
+.btn-secondary:hover {
+    background: #f8fafc;
+
+    transform:
+        translateY(-1px);
+}
+
+.excel-controls .btn-primary {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+
+    border: none;
+
+    box-shadow:
+        0 5px 15px
+        rgba(37, 99, 235, 0.18);
+}
+
+.excel-controls .btn-primary:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(37, 99, 235, 0.25);
+}
+
+
+/* ============================================================
+   CONTENIDO DEL DASHBOARD
+   ============================================================ */
+
+.dashboard-content {
+    width: 100%;
+
+    padding:
+        28px 30px 10px;
+}
+
+.section-heading {
+    margin-bottom: 16px;
+}
+
+.section-heading span {
+    color: var(--text-soft);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.section-heading h2 {
+    margin: 3px 0 0;
+
+    color: var(--text);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+
+/* ============================================================
+   TARJETAS DE RESUMEN
+   ============================================================ */
+
+.cards-container {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.dashboard-card {
+    min-width: 0;
+    min-height: 130px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 20px;
+
+    background: var(--surface);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 13px;
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform:
+        translateY(-3px);
+
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icon {
+    width: 52px;
+    min-width: 52px;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 21px;
+}
+
+.card-icon.blue {
+    background: #eff6ff;
+}
+
+.card-icon.green {
+    background: #ecfdf5;
+}
+
+.card-icon.purple {
+    background: #f5f3ff;
+}
+
+.card-data {
+    min-width: 0;
+}
+
+.card-data > span {
+    color: var(--text-muted);
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+}
+
+.card-data h3 {
+    margin: 3px 0 0;
+
+    color: var(--text-soft);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-data p {
+    margin: 6px 0 0;
+
+    color: var(--text);
+
+    font-size: 28px;
+
+    line-height: 1;
+
+    font-weight: 800;
+}
+
+
+/* ============================================================
+   CONTENEDORES DE LOS MÓDULOS
+   ============================================================ */
+
+.modulo-section {
+    width:
+        calc(100% - 60px);
+
+    margin:
+        20px 30px;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    box-shadow: none;
+
+    overflow: visible;
+
+    display: block;
+
+    animation:
+        aparecer 0.3s ease;
+}
+
+.modulo-section.is-active .modulo-administrativo {
+    border-color: var(--accent);
+    box-shadow: 0 18px 45px rgba(95, 118, 255, 0.18);
+}
+
+
+/*
+   El contenido real generado por clientes.js,
+   productos.js y proveedores.js se encuentra
+   dentro de .modulo-administrativo.
+*/
+
+.modulo-administrativo {
+    width: 100%;
+
+    padding: 24px;
+
+    background: var(--surface);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 14px;
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.modulo-administrativo:hover {
+    box-shadow:
+        0 8px 25px
+        rgba(15, 23, 42, 0.07);
+}
+
+
+/* ============================================================
+   CABECERA DE LOS MÓDULOS
+   ============================================================ */
+
+.encabezado-modulo {
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    padding-bottom: 16px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.encabezado-modulo h2 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.encabezado-modulo p {
+    margin: 6px 0 0;
+
+    color: var(--text-soft);
+
+    font-size: 11px;
+}
+
+
+/*
+   Compatibilidad con versiones que utilizan
+   la cabecera alternativa.
+*/
+
+.modulo-dashboard-header {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 14px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.modulo-dashboard-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.modulo-dashboard-title .modulo-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: #eff6ff;
+
+    font-size: 16px;
+}
+
+.modulo-dashboard-title h2 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.modulo-dashboard-title p {
+    margin: 2px 0 0;
+
+    color: var(--text-soft);
+
+    font-size: 10px;
+}
+
+
+/* ============================================================
+   FORMULARIOS CRUD
+   ============================================================ */
+
+.modulo-administrativo form,
+.modulo-section form {
+    width: 100%;
+
+    margin: 0 0 20px;
+
+    padding: 18px;
+
+    background: var(--surface-soft);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 11px;
+}
+
+
+/*
+   Los formularios generados actualmente no
+   tienen una clase de grid. Por eso usamos
+   el propio formulario como grid.
+*/
+
+.modulo-administrativo form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+.grupo-formulario {
+    min-width: 0;
+}
+
+.grupo-formulario label,
+.modulo-section label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #475569;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.modulo-section input,
+.modulo-section select,
+.modulo-section textarea {
+    width: 100%;
+
+    min-height: 40px;
+
+    padding:
+        9px 11px;
+
+    border:
+        1px solid var(--border-dark);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    color: #334155;
+
+    background: white;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.modulo-section input::placeholder {
+    color: #94a3b8;
+}
+
+.modulo-section input:focus,
+.modulo-section select:focus,
+.modulo-section textarea:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, 0.10);
+}
+
+
+/* ============================================================
+   ACCIONES DEL FORMULARIO
+   ============================================================ */
+
+.acciones-formulario {
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 2px;
+}
+
+.acciones-formulario button {
+    min-height: 38px;
+
+    padding:
+        8px 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.acciones-formulario button:first-child {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+
+    box-shadow:
+        0 4px 12px
+        rgba(37, 99, 235, 0.18);
+}
+
+.acciones-formulario button:first-child:hover {
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 7px 17px
+        rgba(37, 99, 235, 0.24);
+}
+
+.acciones-formulario button:last-child {
+    color: #475569;
+
+    background: #e2e8f0;
+}
+
+.acciones-formulario button:last-child:hover {
+    background: #cbd5e1;
+}
+
+
+/* ============================================================
+   MENSAJES CRUD
+   ============================================================ */
+
+#mensaje-clientes,
+#mensaje-productos,
+#mensaje-proveedores {
+    grid-column: 1 / -1;
+
+    min-height: 20px;
+
+    margin: 0;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+#mensaje-clientes.exito,
+#mensaje-productos.exito,
+#mensaje-proveedores.exito {
+    color: var(--success);
+}
+
+#mensaje-clientes.error,
+#mensaje-productos.error,
+#mensaje-proveedores.error {
+    color: var(--danger);
+}
+
+#mensaje-clientes.informacion,
+#mensaje-productos.informacion,
+#mensaje-proveedores.informacion {
+    color: #2563eb;
+}
+
+
+/* ============================================================
+   TABLAS
+   ============================================================ */
+
+.contenedor-tabla {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: white;
+}
+
+.modulo-section table {
+    width: 100%;
+
+    min-width: 680px;
+
+    margin: 0;
+
+    border-collapse: collapse;
+
+    background: white;
+}
+
+.modulo-section thead {
+    background: #f8fafc;
+}
+
+.modulo-section th {
+    padding: 13px 12px;
+
+    text-align: left;
+
+    color: #64748b;
+
+    border-bottom:
+        1px solid var(--border);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.modulo-section td {
+    padding: 13px 12px;
+
+    color: #334155;
+
+    border-bottom:
+        1px solid #edf2f7;
+
+    font-size: 11px;
+
+    vertical-align: middle;
+}
+
+.modulo-section tbody tr {
+    transition:
+        background 0.15s ease;
+}
+
+.modulo-section tbody tr:hover {
+    background: #f8fafc;
+}
+
+.modulo-section tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ============================================================
+   BOTONES DE TABLA
+   ============================================================ */
+
+.modulo-section td:last-child {
+    white-space: nowrap;
+}
+
+.modulo-section td button {
+    min-height: 32px;
+
+    margin-right: 5px;
+
+    padding:
+        6px 10px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+/*
+   Primer botón = Editar
+*/
+
+.modulo-section td button:first-child {
+    color: #2563eb;
+
+    background: #eff6ff;
+}
+
+.modulo-section td button:first-child:hover {
+    background: #dbeafe;
+
+    transform:
+        translateY(-1px);
+}
+
+/*
+   Segundo botón = Eliminar
+*/
+
+.modulo-section td button:last-child {
+    color: #dc2626;
+
+    background: #fef2f2;
+}
+
+.modulo-section td button:last-child:hover {
+    background: #fee2e2;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* ============================================================
+   BOTÓN PLEGAR
+   ============================================================ */
+
+.boton-replegar {
+    flex-shrink: 0;
+
+    height: 35px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 0 11px;
+
+    border:
+        1px solid var(--border-dark);
+
+    border-radius: 8px;
+
+    color: #475569;
+
+    background: #f8fafc;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.boton-replegar:hover {
+    color: #2563eb;
+
+    background: #eff6ff;
+
+    border-color: #93c5fd;
+}
+
+.boton-replegar .flecha {
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   ANIMACIÓN
+   ============================================================ */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ============================================================
+   MODO OSCURO
+   ============================================================ */
+
+body.dark-mode {
+    color: #e2e8f0;
+
+    background: #020617;
+}
+
+body.dark-mode .dashboard-container,
+body.dark-mode .main-content {
+    background: #020617;
+}
+
+body.dark-mode .dashboard-header {
+    background: #0f172a;
+
+    border-color: #1e293b;
+}
+
+body.dark-mode .header-title h1 {
+    color: #f8fafc;
+}
+
+body.dark-mode .header-info p {
+    color: #94a3b8;
+}
+
+body.dark-mode .section-heading h2 {
+    color: #f8fafc;
+}
+
+body.dark-mode .dashboard-card {
+    background: #0f172a;
+
+    border-color: #1e293b;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .dashboard-card:hover {
+    background: #111c31;
+}
+
+body.dark-mode .card-data h3 {
+    color: #94a3b8;
+}
+
+body.dark-mode .card-data p {
+    color: #f8fafc;
+}
+
+
+/* ============================================================
+   MÓDULOS - OSCURO
+   ============================================================ */
+
+body.dark-mode .modulo-administrativo {
+    background: #0f172a;
+
+    border-color: #1e293b;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.25);
+}
+
+body.dark-mode .encabezado-modulo,
+body.dark-mode .modulo-dashboard-header {
+    border-color: #1e293b;
+}
+
+body.dark-mode .encabezado-modulo h2,
+body.dark-mode .modulo-dashboard-title h2 {
+    color: #f8fafc;
+}
+
+body.dark-mode .encabezado-modulo p,
+body.dark-mode .modulo-dashboard-title p {
+    color: #94a3b8;
+}
+
+body.dark-mode .modulo-dashboard-title .modulo-icon {
+    background: #172554;
+}
+
+body.dark-mode .modulo-administrativo form,
+body.dark-mode .modulo-section form {
+    background: #111827;
+
+    border-color: #1e293b;
+}
+
+body.dark-mode .modulo-section label {
+    color: #cbd5e1;
+}
+
+body.dark-mode .modulo-section input,
+body.dark-mode .modulo-section select,
+body.dark-mode .modulo-section textarea {
+    color: #e2e8f0;
+
+    background: #0f172a;
+
+    border-color: #334155;
+}
+
+body.dark-mode .modulo-section input::placeholder {
+    color: #64748b;
+}
+
+body.dark-mode .contenedor-tabla {
+    background: #0f172a;
+
+    border-color: #1e293b;
+}
+
+body.dark-mode .modulo-section table {
+    background: #0f172a;
+}
+
+body.dark-mode .modulo-section thead {
+    background: #111827;
+}
+
+body.dark-mode .modulo-section th {
+    color: #94a3b8;
+
+    border-color: #1e293b;
+}
+
+body.dark-mode .modulo-section td {
+    color: #cbd5e1;
+
+    border-color: #1e293b;
+}
+
+body.dark-mode .modulo-section tbody tr:hover {
+    background: #111827;
+}
+
+body.dark-mode .boton-replegar {
+    color: #cbd5e1;
+
+    background: #111827;
+
+    border-color: #334155;
+}
+
+body.dark-mode .boton-replegar:hover {
+    color: #60a5fa;
+
+    background: #1e293b;
+
+    border-color: #3b82f6;
+}
+
+body.dark-mode .btn-secondary {
+    color: #e2e8f0;
+
+    background: #0f172a;
+
+    border-color: #334155;
+}
+
+body.dark-mode .btn-secondary:hover {
+    background: #1e293b;
+}
+
+body.dark-mode .acciones-formulario button:last-child {
+    color: #cbd5e1;
+
+    background: #334155;
+}
+
+body.dark-mode .modulo-section td button:first-child {
+    color: #60a5fa;
+
+    background: #172554;
+}
+
+body.dark-mode .modulo-section td button:last-child {
+    color: #f87171;
+
+    background: #450a0a;
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1050px) {
+
+    :root {
+        --sidebar-width: 215px;
+    }
+
+    .cards-container {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .excel-controls {
+        width: 100%;
+    }
+
+    .modulo-administrativo form {
+        grid-template-columns: 1fr;
+    }
+
+    .acciones-formulario {
+        grid-column: auto;
+    }
+
+    #mensaje-clientes,
+    #mensaje-productos,
+    #mensaje-proveedores {
+        grid-column: auto;
+    }
+}
+
+
+/* ============================================================
+   MÓVIL
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .dashboard-container {
+        display: block;
+    }
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        min-height: auto;
+
+        padding: 18px;
+
+        overflow: visible;
+    }
+
+    .sidebar-menu {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        margin-top: 18px;
+    }
+
+    .menu-item {
+        justify-content: center;
+
+        padding: 8px;
+    }
+
+    .main-content {
+        width: 100%;
+
+        margin-left: 0;
+    }
+
+    .dashboard-header {
+        padding: 20px;
+
+        flex-direction: column;
+    }
+
+    .dashboard-content {
+        padding: 20px;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .modulo-section {
+        width:
+            calc(100% - 40px);
+
+        margin:
+            15px 20px;
+    }
+
+    .modulo-administrativo {
+        padding: 18px;
+    }
+
+    .modulo-administrativo form {
+        grid-template-columns: 1fr;
+
+        padding: 15px;
+    }
+
+    .excel-controls {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+    .btn-secondary,
+    .excel-controls .btn-primary {
+        width: 100%;
+    }
+
+    .modulo-dashboard-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .boton-replegar {
+        width: 100%;
+    }
+
+    .acciones-formulario {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .acciones-formulario button {
+        width: 100%;
+    }
+
+    .contenedor-tabla {
+        overflow-x: auto;
+    }
+}
+
+
+/* ============================================================
+   CELULAR PEQUEÑO
+   ============================================================ */
+
+@media (max-width: 450px) {
+
+    .sidebar-menu {
+        grid-template-columns: 1fr;
+    }
+
+    .menu-item {
+        justify-content: flex-start;
+    }
+
+    .header-title h1 {
+        font-size: 19px;
+    }
+
+    .dashboard-card {
+        padding: 16px;
+    }
+
+    .card-icon {
+        width: 46px;
+        min-width: 46px;
+
+        height: 46px;
+    }
+
+    .card-data p {
+        font-size: 24px;
+    }
+
+    .modulo-section {
+        width:
+            calc(100% - 30px);
+
+        margin:
+            15px;
+    }
+
+    .modulo-administrativo {
+        padding: 14px;
+    }
+}
