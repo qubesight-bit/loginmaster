@@ -98,9 +98,15 @@
         <h2>Indicadores del sistema</h2>
       </div>
       <div class="charts-container">
+        <!-- Básicos -->
         <div class="chart-card"><h3>Clientes registrados</h3><canvas id="graficoClientes"></canvas></div>
         <div class="chart-card"><h3>Productos en inventario</h3><canvas id="graficoProductos"></canvas></div>
         <div class="chart-card"><h3>Proveedores activos</h3><canvas id="graficoProveedores"></canvas></div>
+
+        <!-- Avanzados -->
+        <div class="chart-card admin-only"><h3>Evolución de clientes</h3><canvas id="graficoClientesLinea"></canvas></div>
+        <div class="chart-card admin-only"><h3>Productos por categoría</h3><canvas id="graficoProductosCategorias"></canvas></div>
+        <div class="chart-card admin-only"><h3>% Proveedores activos</h3><canvas id="graficoProveedoresGauge"></canvas></div>
       </div>
     </section>
 

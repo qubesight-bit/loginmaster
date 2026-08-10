@@ -1,23 +1,29 @@
-# LoginMaster
+# LoginMaster - Sistema Administrativo
 
-Sistema administrativo con login, dashboard y CRUD de clientes, productos y proveedores.  
-Proyecto académico desarrollado con **HTML, CSS y JavaScript**, integrando almacenamiento en `localStorage` y soporte para importación desde Excel.
+LoginMaster es un sistema administrativo desarrollado en **HTML, CSS y JavaScript** que permite gestionar clientes, productos y proveedores, con autenticación de usuarios y roles diferenciados.
 
 ---
 
-## 🚀 Funcionalidades principales
-
-- **Login seguro** con usuarios predefinidos.
-- **Dashboard administrativo** con tarjetas de resumen.
-- **CRUD de clientes, productos y proveedores**:
-  - Registrar, consultar, editar y eliminar.
-  - Persistencia en `localStorage`.
-- **Modo claro / modo oscuro** con persistencia de preferencia.
-- **Importación desde Excel** (versión 2.0):
-  - Subir archivo `.xlsx` con clientes, productos y proveedores.
-  - Carga automática de registros al sistema.
+## 🚀 Características principales
+- **Autenticación de usuarios** con almacenamiento en `localStorage`.
+- **Roles**:
+  - **Administrador**: acceso completo a CRUD y todos los indicadores.
+  - **Operador**: acceso restringido, sin permisos de eliminación y con indicadores básicos.
+- **Dashboard**:
+  - Contadores dinámicos de clientes, productos y proveedores.
+  - Indicadores visuales con **Chart.js**:
+    - Clientes registrados (barra).
+    - Productos en inventario (pie).
+    - Proveedores activos (doughnut).
+  - Indicadores avanzados (solo Administrador):
+    - Evolución de clientes en el tiempo (línea).
+    - Productos por categoría (barras apiladas).
+    - % de proveedores activos (gauge/doughnut).
+- **Diseño responsive** adaptado a escritorio y móvil.
+- **Funciones extra**:
+  - Importar y exportar datos en Excel.
+  - Modo oscuro/claro.
 
 ---
 
 ## 📂 Estructura del proyecto
-
