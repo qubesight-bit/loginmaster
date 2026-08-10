@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-
     console.log("LoginMaster Dashboard iniciado");
-
 
     // ==========================================
     // VERIFICAR SESIÓN
@@ -13,14 +11,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const nombreUsuario =
         localStorage.getItem("nombreUsuario");
 
-
     if (!usuarioLogueado) {
-
         window.location.href = "index.html";
-
         return;
     }
-
 
     // ==========================================
     // MOSTRAR USUARIO
@@ -29,13 +23,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const elementoNombre =
         document.getElementById("nombreUsuario");
 
-
     if (elementoNombre) {
-
         elementoNombre.textContent =
             nombreUsuario || usuarioLogueado || "Usuario";
     }
-
 
     // ==========================================
     // CERRAR SESIÓN
@@ -44,21 +35,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoutBtn =
         document.getElementById("logoutBtn");
 
-
     if (logoutBtn) {
-
         logoutBtn.addEventListener(
             "click",
             function () {
+                /*
+                 * Solamente elimina la información de la sesión.
+                 * Los clientes, productos y proveedores se conservan.
+                 */
+                localStorage.removeItem("usuarioLogueado");
+                localStorage.removeItem("nombreUsuario");
 
-                localStorage.clear();
-
-                window.location.href =
-                    "index.html";
+                window.location.href = "index.html";
             }
         );
     }
-
 
     // ==========================================
     // BOTÓN LIMPIAR DATOS
@@ -67,56 +58,45 @@ document.addEventListener("DOMContentLoaded", function () {
     const clearDataBtn =
         document.getElementById("clearDataBtn");
 
-
     if (clearDataBtn) {
-
         clearDataBtn.addEventListener(
             "click",
             function () {
-
                 const confirmar =
                     window.confirm(
                         "¿Deseas borrar todos los datos de clientes, productos y proveedores?"
                     );
 
                 if (!confirmar) {
-
                     return;
-
                 }
 
+                /*
+                 * Solo elimina los datos administrativos.
+                 * No elimina la sesión ni otras configuraciones.
+                 */
                 localStorage.removeItem("clientes");
                 localStorage.removeItem("productos");
                 localStorage.removeItem("proveedores");
 
-                actualizarContadores();
-
-                if (window.mostrarClientes) {
-                    window.mostrarClientes();
-                }
-
-                if (window.mostrarProductos) {
-                    window.mostrarProductos();
-                }
-
-                if (window.mostrarProveedores) {
-                    window.mostrarProveedores();
-                }
-
                 window.alert(
                     "Los datos se han limpiado correctamente."
                 );
+
+                /*
+                 * Recarga la página para que los arreglos internos
+                 * de cada CRUD vuelvan a cargarse vacíos.
+                 */
+                window.location.reload();
             }
         );
     }
-
 
     // ==========================================
     // ACTUALIZAR CONTADORES
     // ==========================================
 
     actualizarContadores();
-
 
     // ==========================================
     // NAVEGACIÓN DEL SIDEBAR
@@ -125,53 +105,38 @@ document.addEventListener("DOMContentLoaded", function () {
     const menuItems =
         document.querySelectorAll(".menu-item");
 
-
     menuItems.forEach(function (item) {
-
         item.addEventListener(
             "click",
             function (event) {
-
                 event.preventDefault();
 
-
                 menuItems.forEach(function (elemento) {
-
                     elemento.classList.remove("active");
-
                 });
 
-
                 item.classList.add("active");
-
 
                 const modulo =
                     item.getAttribute("data-modulo");
 
-
                 mostrarModulo(modulo);
-
             }
         );
-
     });
-
 
     // ==========================================
     // MOSTRAR CLIENTES INICIALMENTE
     // ==========================================
 
     mostrarModulo("clientes");
-
 });
-
 
 // ==========================================
 // ACTUALIZAR CONTADORES
 // ==========================================
 
 function actualizarContadores() {
-
     const clientes =
         obtenerDatosLocalStorage("clientes");
 
@@ -180,7 +145,6 @@ function actualizarContadores() {
 
     const proveedores =
         obtenerDatosLocalStorage("proveedores");
-
 
     const contadorClientes =
         document.getElementById("clientes-count");
@@ -191,87 +155,59 @@ function actualizarContadores() {
     const contadorProveedores =
         document.getElementById("proveedores-count");
 
-
     if (contadorClientes) {
-
         contadorClientes.textContent =
             clientes.length;
-
     }
-
 
     if (contadorProductos) {
-
         contadorProductos.textContent =
             productos.length;
-
     }
-
 
     if (contadorProveedores) {
-
         contadorProveedores.textContent =
             proveedores.length;
-
     }
-
 }
 
-
 // ==========================================
-// LEER LOCAL STORAGE
+// LEER LOCALSTORAGE
 // ==========================================
 
 function obtenerDatosLocalStorage(clave) {
-
     try {
-
         const datos =
             localStorage.getItem(clave);
 
-
         if (!datos) {
-
             return [];
-
         }
-
 
         const resultado =
             JSON.parse(datos);
 
-
         if (Array.isArray(resultado)) {
-
             return resultado;
-
         }
 
-
         return [];
-
     } catch (error) {
-
         console.error(
             "Error leyendo " + clave,
             error
         );
 
         return [];
-
     }
-
 }
 
-
 // ==========================================
-// MOSTRAR / OCULTAR MÓDULOS
+// MOSTRAR LOS MÓDULOS
 // ==========================================
 
 function mostrarModulo(modulo) {
-
     const secciones = {
-
         clientes:
             document.getElementById(
                 "modulo-clientes"
@@ -286,50 +222,39 @@ function mostrarModulo(modulo) {
             document.getElementById(
                 "modulo-proveedores"
             )
-
     };
-
 
     Object.keys(secciones).forEach(
         function (nombre) {
-
             const seccion =
                 secciones[nombre];
 
-
             if (!seccion) {
-
                 return;
-
             }
 
-
-            seccion.style.display =
-                "block";
+            /*
+             * Conservamos todos los módulos renderizados.
+             * La navegación desplaza la pantalla al seleccionado.
+             */
+            seccion.style.display = "block";
 
             if (nombre === modulo) {
-
                 seccion.classList.add("is-active");
 
                 seccion.scrollIntoView({
                     behavior: "smooth",
                     block: "start"
                 });
-
             } else {
-
                 seccion.classList.remove("is-active");
-
             }
-
         }
     );
-
 }
 
-
 // ==========================================
-// ACTUALIZAR CONTADORES CUANDO CAMBIAN
+// PERMITIR QUE LOS CRUD ACTUALICEN LAS TARJETAS
 // ==========================================
 
 window.actualizarContadores =
