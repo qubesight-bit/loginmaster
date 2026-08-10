@@ -1,124 +1,423 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LoginMaster - Dashboard</title>
+    <meta charset="UTF-8">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/dashboard.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LoginMaster - Dashboard</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
 </head>
+
 <body>
-<div class="dashboard-container">
+    <div class="dashboard-layout">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-container">
-        <div class="logo">LM</div>
-        <div class="logo-text">
-          <h2>LoginMaster</h2>
-          <span>SISTEMA ADMINISTRATIVO</span>
-        </div>
-      </div>
-      <span class="badge">v2.0</span>
+        <!-- ==============================
+             MENÚ LATERAL
+        =============================== -->
+
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo">
+                        LM
+                    </div>
+
+                    <div class="logo-text">
+                        <h2>LoginMaster</h2>
+                        <span>SISTEMA ADMINISTRATIVO</span>
+                    </div>
+                </div>
+
+                <span class="badge">
+                    v2.0
+                </span>
+            </div>
+
+            <nav
+                class="sidebar-menu"
+                aria-label="Navegación principal"
+            >
+                <a
+                    href="#modulo-clientes"
+                    class="menu-item active"
+                    data-modulo="clientes"
+                >
+                    <span
+                        class="icon"
+                        aria-hidden="true"
+                    >
+                        👥
+                    </span>
+
+                    <span>Clientes</span>
+                </a>
+
+                <a
+                    href="#modulo-productos"
+                    class="menu-item"
+                    data-modulo="productos"
+                >
+                    <span
+                        class="icon"
+                        aria-hidden="true"
+                    >
+                        📦
+                    </span>
+
+                    <span>Productos</span>
+                </a>
+
+                <a
+                    href="#modulo-proveedores"
+                    class="menu-item"
+                    data-modulo="proveedores"
+                >
+                    <span
+                        class="icon"
+                        aria-hidden="true"
+                    >
+                        🤝
+                    </span>
+
+                    <span>Proveedores</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button
+                    id="themeToggle"
+                    class="theme-button"
+                    type="button"
+                >
+                    <span
+                        class="icon"
+                        id="themeIcon"
+                        aria-hidden="true"
+                    >
+                        🌙
+                    </span>
+
+                    <span id="themeText">
+                        Modo oscuro
+                    </span>
+                </button>
+
+                <button
+                    id="logoutBtn"
+                    class="logout-button"
+                    type="button"
+                >
+                    <span
+                        class="icon"
+                        aria-hidden="true"
+                    >
+                        🚪
+                    </span>
+
+                    <span>Cerrar sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- ==============================
+             CONTENIDO PRINCIPAL
+        =============================== -->
+
+        <main class="main-content">
+
+            <!-- ==========================
+                 ENCABEZADO
+            =========================== -->
+
+            <header class="dashboard-header">
+                <div class="header-info">
+                    <span class="header-label">
+                        PANEL ADMINISTRATIVO
+                    </span>
+
+                    <h1>
+                        Dashboard Administrativo
+                    </h1>
+
+                    <div class="usuario-info">
+                        <p>
+                            Bienvenido,
+
+                            <strong id="nombreUsuario">
+                                Usuario
+                            </strong>
+                        </p>
+
+                        <p class="rol-info">
+                            Rol:
+
+                            <strong
+                                id="rolUsuario"
+                                class="role-badge"
+                            >
+                                Sin asignar
+                            </strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="excel-controls">
+                    <label
+                        for="excelUpload"
+                        class="btn-secondary"
+                    >
+                        📥 Importar Excel
+
+                        <input
+                            type="file"
+                            id="excelUpload"
+                            accept=".xlsx,.xls"
+                            hidden
+                        >
+                    </label>
+
+                    <button
+                        id="exportExcelBtn"
+                        class="btn-primary"
+                        type="button"
+                    >
+                        📤 Exportar datos
+                    </button>
+
+                    <button
+                        id="clearDataBtn"
+                        class="btn-secondary"
+                        type="button"
+                        data-permiso="eliminar"
+                    >
+                        🧹 Limpiar datos
+                    </button>
+                </div>
+            </header>
+
+            <!-- ==========================
+                 RESUMEN
+            =========================== -->
+
+            <section
+                class="dashboard-content"
+                aria-labelledby="titulo-resumen"
+            >
+                <div class="section-heading">
+                    <span>
+                        INFORMACIÓN GENERAL
+                    </span>
+
+                    <h2 id="titulo-resumen">
+                        Resumen del sistema
+                    </h2>
+                </div>
+
+                <div class="cards-container">
+
+                    <!-- CLIENTES -->
+
+                    <article class="dashboard-card">
+                        <div
+                            class="card-icon blue"
+                            aria-hidden="true"
+                        >
+                            👥
+                        </div>
+
+                        <div class="card-data">
+                            <span>REGISTROS</span>
+
+                            <h3>Clientes</h3>
+
+                            <p id="clientes-count">
+                                0
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- PRODUCTOS -->
+
+                    <article class="dashboard-card">
+                        <div
+                            class="card-icon green"
+                            aria-hidden="true"
+                        >
+                            📦
+                        </div>
+
+                        <div class="card-data">
+                            <span>INVENTARIO</span>
+
+                            <h3>Productos</h3>
+
+                            <p id="productos-count">
+                                0
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- PROVEEDORES -->
+
+                    <article class="dashboard-card">
+                        <div
+                            class="card-icon purple"
+                            aria-hidden="true"
+                        >
+                            🤝
+                        </div>
+
+                        <div class="card-data">
+                            <span>REGISTROS</span>
+
+                            <h3>Proveedores</h3>
+
+                            <p id="proveedores-count">
+                                0
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ==========================
+                 INDICADORES
+            =========================== -->
+
+            <section
+                class="dashboard-indicadores"
+                aria-labelledby="titulo-indicadores"
+            >
+                <div class="section-heading">
+                    <span>
+                        ANÁLISIS VISUAL
+                    </span>
+
+                    <h2 id="titulo-indicadores">
+                        Indicadores del sistema
+                    </h2>
+                </div>
+
+                <div class="charts-container">
+
+                    <article class="chart-card">
+                        <h3>
+                            Clientes registrados
+                        </h3>
+
+                        <div class="chart-wrapper">
+                            <canvas
+                                id="graficoClientes"
+                                aria-label="Gráfico de clientes registrados"
+                            ></canvas>
+                        </div>
+                    </article>
+
+                    <article class="chart-card">
+                        <h3>
+                            Productos en inventario
+                        </h3>
+
+                        <div class="chart-wrapper">
+                            <canvas
+                                id="graficoProductos"
+                                aria-label="Gráfico de productos registrados"
+                            ></canvas>
+                        </div>
+                    </article>
+
+                    <article class="chart-card">
+                        <h3>
+                            Proveedores activos
+                        </h3>
+
+                        <div class="chart-wrapper">
+                            <canvas
+                                id="graficoProveedores"
+                                aria-label="Gráfico de proveedores registrados"
+                            ></canvas>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ==========================
+                 CRUD DE CLIENTES
+            =========================== -->
+
+            <section
+                id="modulo-clientes"
+                class="modulo-section is-active"
+                aria-label="Administración de clientes"
+            ></section>
+
+            <!-- ==========================
+                 CRUD DE PRODUCTOS
+            =========================== -->
+
+            <section
+                id="modulo-productos"
+                class="modulo-section"
+                aria-label="Administración de productos"
+            ></section>
+
+            <!-- ==========================
+                 CRUD DE PROVEEDORES
+            =========================== -->
+
+            <section
+                id="modulo-proveedores"
+                class="modulo-section"
+                aria-label="Administración de proveedores"
+            ></section>
+        </main>
     </div>
 
-    <nav class="sidebar-menu">
-      <a href="#modulo-clientes" class="menu-item" data-modulo="clientes"><span class="icon">👥</span><span>Clientes</span></a>
-      <a href="#modulo-productos" class="menu-item" data-modulo="productos"><span class="icon">📦</span><span>Productos</span></a>
-      <a href="#modulo-proveedores" class="menu-item" data-modulo="proveedores"><span class="icon">🤝</span><span>Proveedores</span></a>
-    </nav>
+    <!-- ==============================
+         LIBRERÍAS EXTERNAS
+    =============================== -->
 
-    <div class="sidebar-footer">
-      <button id="themeToggle" class="theme-button" type="button">
-        <span class="icon" id="themeIcon">🌙</span><span id="themeText">Modo oscuro</span>
-      </button>
-      <button id="logoutBtn" class="logout-button" type="button">
-        <span class="icon">🚪</span><span>Cerrar sesión</span>
-      </button>
-    </div>
-  </aside>
+    <!-- Lectura y escritura de Excel -->
+    <script
+        src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"
+    ></script>
 
-  <!-- CONTENIDO -->
-  <main class="main-content">
+    <!-- Gráficos del Dashboard -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
 
-    <!-- HEADER -->
-    <header class="dashboard-header">
-      <div class="header-info">
-        <span class="header-label">PANEL ADMINISTRATIVO</span>
-        <h1>Dashboard Administrativo</h1>
-        <p>Bienvenido, <strong id="nombreUsuario">Usuario</strong></p>
-      </div>
+    <!-- ==============================
+         CAPA DE DATOS
+    =============================== -->
 
-      <div class="excel-controls">
-        <label for="excelUpload" class="btn-secondary">
-          📥 Importar Excel
-          <input type="file" id="excelUpload" accept=".xlsx,.xls" hidden>
-        </label>
-        <button id="exportExcelBtn" class="btn-primary" type="button">📤 Exportar datos</button>
-        <button id="clearDataBtn" class="btn-secondary" type="button">🧹 Limpiar datos</button>
-      </div>
-    </header>
+    <script src="./js/data-service.js"></script>
 
-    <!-- RESUMEN -->
-    <section class="dashboard-content">
-      <div class="section-heading">
-        <span>INFORMACIÓN GENERAL</span>
-        <h2>Resumen del sistema</h2>
-      </div>
+    <!-- ==============================
+         MÓDULOS CRUD
+    =============================== -->
 
-      <div class="cards-container">
-        <div class="dashboard-card">
-          <div class="card-icon blue">👥</div>
-          <div class="card-data">
-            <span>REGISTROS</span><h3>Clientes</h3><p id="clientes-count">0</p>
-          </div>
-        </div>
-        <div class="dashboard-card">
-          <div class="card-icon green">📦</div>
-          <div class="card-data">
-            <span>INVENTARIO</span><h3>Productos</h3><p id="productos-count">0</p>
-          </div>
-        </div>
-        <div class="dashboard-card">
-          <div class="card-icon purple">🤝</div>
-          <div class="card-data">
-            <span>REGISTROS</span><h3>Proveedores</h3><p id="proveedores-count">0</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <script src="./js/clientes.js"></script>
+    <script src="./js/productos.js"></script>
+    <script src="./js/proveedores.js"></script>
 
-    <!-- INDICADORES -->
-    <section class="dashboard-indicadores">
-      <div class="section-heading">
-        <span>ANÁLISIS VISUAL</span>
-        <h2>Indicadores del sistema</h2>
-      </div>
-      <div class="charts-container">
-        <div class="chart-card"><h3>Clientes registrados</h3><canvas id="graficoClientes"></canvas></div>
-        <div class="chart-card"><h3>Productos en inventario</h3><canvas id="graficoProductos"></canvas></div>
-        <div class="chart-card"><h3>Proveedores activos</h3><canvas id="graficoProveedores"></canvas></div>
-      </div>
-    </section>
+    <!-- ==============================
+         DASHBOARD Y UTILIDADES
+    =============================== -->
 
-    <!-- CRUD -->
-    <section id="modulo-clientes" class="modulo-section"></section>
-    <section id="modulo-productos" class="modulo-section"></section>
-    <section id="modulo-proveedores" class="modulo-section"></section>
-  </main>
-</div>
-
-<!-- SCRIPTS -->
-<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="./js/clientes.js"></script>
-<script src="./js/productos.js"></script>
-<script src="./js/proveedores.js"></script>
-<script src="./js/dashboard.js"></script>
-<script src="./js/theme.js"></script>
-<script src="./js/excel.js"></script>
+    <script src="./js/dashboard.js"></script>
+    <script src="./js/theme.js"></script>
+    <script src="./js/excel.js"></script>
 </body>
 </html>
