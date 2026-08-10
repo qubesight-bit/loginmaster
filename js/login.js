@@ -2,12 +2,14 @@ const usuarios = [
   {
     usuario: "admin",
     password: "1234",
-    nombre: "Administrador"
+    nombre: "Administrador",
+    rol: "Administrador"
   },
   {
     usuario: "ulysses",
     password: "1234",
-    nombre: "Ulysses"
+    nombre: "Ulysses",
+    rol: "Operador"
   }
 ];
 
@@ -24,9 +26,6 @@ formulario.addEventListener("submit", function (evento) {
   const usuarioIngresado = document.getElementById("usuario").value.trim();
   const passwordIngresada = document.getElementById("password").value;
 
-  console.log("Usuario:", usuarioIngresado);
-  // 🔴 Línea eliminada: ya no se imprime la contraseña en consola
-
   const usuarioEncontrado = usuarios.find(function (item) {
     return item.usuario === usuarioIngresado &&
            item.password === passwordIngresada;
@@ -37,6 +36,7 @@ formulario.addEventListener("submit", function (evento) {
 
     localStorage.setItem("usuarioLogueado", usuarioEncontrado.usuario);
     localStorage.setItem("nombreUsuario", usuarioEncontrado.nombre);
+    localStorage.setItem("rolUsuario", usuarioEncontrado.rol); // 🔹 Guardar rol
 
     mensaje.textContent = "✓ Inicio de sesión correcto";
     mensaje.className = "mensaje exito";
