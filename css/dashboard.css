@@ -517,6 +517,22 @@ body {
     color: #92400e;
 }
 
+#importJsonBtn,
+#exportJsonBtn {
+    color: #0f766e;
+
+    background: #ecfeff;
+
+    border: 1px solid #5eead4;
+}
+
+#importJsonBtn:hover,
+#exportJsonBtn:hover {
+    background: #cffafe;
+
+    color: #115e59;
+}
+
 .btn-secondary,
 .excel-controls .btn-primary {
     height: 40px;

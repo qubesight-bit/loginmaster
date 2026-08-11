@@ -12,24 +12,58 @@ document.addEventListener(
                 "exportExcelBtn"
             );
 
+        const importJsonBtn =
+            document.getElementById(
+                "importJsonBtn"
+            );
+
+        const jsonUpload =
+            document.getElementById(
+                "jsonUpload"
+            );
+
+        const exportJsonBtn =
+            document.getElementById(
+                "exportJsonBtn"
+            );
 
         if (excelUpload) {
-
             excelUpload.addEventListener(
                 "change",
                 importarExcel
             );
-
         }
 
-
         if (exportExcelBtn) {
-
             exportExcelBtn.addEventListener(
                 "click",
                 exportarExcel
             );
+        }
 
+        if (importJsonBtn) {
+            importJsonBtn.addEventListener(
+                "click",
+                function () {
+                    if (jsonUpload) {
+                        jsonUpload.click();
+                    }
+                }
+            );
+        }
+
+        if (jsonUpload) {
+            jsonUpload.addEventListener(
+                "change",
+                importarJson
+            );
+        }
+
+        if (exportJsonBtn) {
+            exportJsonBtn.addEventListener(
+                "click",
+                exportarJson
+            );
         }
 
     }
@@ -486,6 +520,74 @@ function exportarExcel() {
         "LoginMaster_Backup.xlsx"
     );
 
+}
+
+
+// ==========================================
+// IMPORTAR JSON
+// ==========================================
+
+function importarJson(event) {
+
+    const archivo = event.target.files[0];
+
+    if (!archivo) {
+        return;
+    }
+
+    const lector = new FileReader();
+
+    lector.onload = function (e) {
+        try {
+            const datos = JSON.parse(e.target.result);
+            const payload = datos && datos.data ? datos.data : datos;
+
+            const clientes = Array.isArray(payload.clientes) ? payload.clientes : [];
+            const productos = Array.isArray(payload.productos) ? payload.productos : [];
+            const proveedores = Array.isArray(payload.proveedores) ? payload.proveedores : [];
+
+            localStorage.setItem("clientes", JSON.stringify(clientes));
+            localStorage.setItem("productos", JSON.stringify(productos));
+            localStorage.setItem("proveedores", JSON.stringify(proveedores));
+
+            alert("¡Datos JSON importados correctamente!");
+            location.reload();
+
+        } catch (error) {
+            console.error("Error importando JSON:", error);
+            alert("No se pudo leer el archivo JSON.");
+        }
+    };
+
+    lector.readAsText(archivo);
+    event.target.value = "";
+}
+
+
+// ==========================================
+// EXPORTAR JSON
+// ==========================================
+
+function exportarJson() {
+
+    const payload = {
+        exportadoEn: new Date().toISOString(),
+        clientes: obtenerDatos("clientes"),
+        productos: obtenerDatos("productos"),
+        proveedores: obtenerDatos("proveedores")
+    };
+
+    const contenido = JSON.stringify(payload, null, 2);
+    const blob = new Blob([contenido], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const enlace = document.createElement("a");
+
+    enlace.href = url;
+    enlace.download = "LoginMaster_Datos.json";
+    document.body.appendChild(enlace);
+    enlace.click();
+    document.body.removeChild(enlace);
+    URL.revokeObjectURL(url);
 }
 
 

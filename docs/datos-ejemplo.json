@@ -1,0 +1,51 @@
+{
+  "exportadoEn": "2026-08-11T00:00:00.000Z",
+  "clientes": [
+    {
+      "id": 1,
+      "nombre": "María López",
+      "correo": "maria@empresa.com",
+      "telefono": "8888-1111",
+      "estado": "activo"
+    },
+    {
+      "id": 2,
+      "nombre": "Carlos Ramírez",
+      "correo": "carlos@empresa.com",
+      "telefono": "8888-2222",
+      "estado": "activo"
+    }
+  ],
+  "productos": [
+    {
+      "id": 10,
+      "nombre": "Laptop Empresarial",
+      "categoria": "Computadoras",
+      "precio": 450000,
+      "existencias": 8
+    },
+    {
+      "id": 11,
+      "nombre": "Mouse Inalámbrico",
+      "categoria": "Accesorios",
+      "precio": 18000,
+      "existencias": 25
+    }
+  ],
+  "proveedores": [
+    {
+      "id": 100,
+      "empresa": "Tecnología CR",
+      "contacto": "Ana Vargas",
+      "correo": "ventas@tecnologiacr.com",
+      "telefono": "2222-1000"
+    },
+    {
+      "id": 101,
+      "empresa": "Suministros Global",
+      "contacto": "Luis Mora",
+      "correo": "contacto@suministrosglobal.com",
+      "telefono": "2222-2000"
+    }
+  ]
+}

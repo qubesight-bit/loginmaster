@@ -1,3 +1,5 @@
+const chartInstances = {};
+
 document.addEventListener("DOMContentLoaded", function () {
     console.log("LoginMaster Dashboard iniciado");
 
@@ -43,8 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.removeItem("productos");
             localStorage.removeItem("proveedores");
             window.alert("Los datos se han limpiado correctamente.");
-            actualizarContadores();
-            generarIndicadores(); // 🔹 regenerar gráficos después de limpiar
+            window.location.reload();
         });
     }
 
@@ -83,6 +84,17 @@ function actualizarContadores() {
 
 // INDICADORES
 function generarIndicadores(rolUsuario) {
+    if (typeof window.Chart === "undefined") {
+        return;
+    }
+
+    Object.keys(chartInstances).forEach(function (key) {
+        if (chartInstances[key]) {
+            chartInstances[key].destroy();
+        }
+        delete chartInstances[key];
+    });
+
     const clientes = obtenerDatosLocalStorage("clientes");
     const productos = obtenerDatosLocalStorage("productos");
     const proveedores = obtenerDatosLocalStorage("proveedores");
@@ -90,7 +102,7 @@ function generarIndicadores(rolUsuario) {
     // Clientes (básico)
     const ctxClientes = document.getElementById("graficoClientes");
     if (ctxClientes) {
-        new Chart(ctxClientes, {
+        chartInstances.clientes = new Chart(ctxClientes, {
             type: "bar",
             data: {
                 labels: ["Clientes"],
@@ -111,7 +123,7 @@ function generarIndicadores(rolUsuario) {
     // Productos (básico)
     const ctxProductos = document.getElementById("graficoProductos");
     if (ctxProductos) {
-        new Chart(ctxProductos, {
+        chartInstances.productos = new Chart(ctxProductos, {
             type: "pie",
             data: {
                 labels: ["Registrados", "Espacio libre"],
@@ -130,7 +142,7 @@ function generarIndicadores(rolUsuario) {
     // Proveedores (básico)
     const ctxProveedores = document.getElementById("graficoProveedores");
     if (ctxProveedores) {
-        new Chart(ctxProveedores, {
+        chartInstances.proveedores = new Chart(ctxProveedores, {
             type: "doughnut",
             data: {
                 labels: ["Proveedores activos"],
@@ -151,7 +163,7 @@ function generarIndicadores(rolUsuario) {
         // Evolución de clientes (línea)
         const ctxClientesLinea = document.getElementById("graficoClientesLinea");
         if (ctxClientesLinea) {
-            new Chart(ctxClientesLinea, {
+            chartInstances.clientesLinea = new Chart(ctxClientesLinea, {
                 type: "line",
                 data: {
                     labels: clientes.map((c, i) => `Registro ${i+1}`),
@@ -177,7 +189,7 @@ function generarIndicadores(rolUsuario) {
                 const cat = p.categoria || "Sin categoría";
                 categorias[cat] = (categorias[cat] || 0) + 1;
             });
-            new Chart(ctxProductosCategorias, {
+            chartInstances.productosCategorias = new Chart(ctxProductosCategorias, {
                 type: "bar",
                 data: {
                     labels: Object.keys(categorias),
@@ -199,7 +211,7 @@ function generarIndicadores(rolUsuario) {
         if (ctxProveedoresGauge) {
             const total = proveedores.length || 1;
             const activos = proveedores.filter(p => p.activo).length;
-            new Chart(ctxProveedoresGauge, {
+            chartInstances.proveedoresGauge = new Chart(ctxProveedoresGauge, {
                 type: "doughnut",
                 data: {
                     labels: ["Activos", "Inactivos"],
@@ -252,3 +264,4 @@ function mostrarModulo(modulo) {
 }
 
 window.actualizarContadores = actualizarContadores;
+window.generarIndicadores = generarIndicadores;
